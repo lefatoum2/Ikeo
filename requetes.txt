@@ -1,0 +1,51 @@
+•Afficher les nom et description de tous les produits,
+
+	SELECT nom_produit, desription_produit FROM produits
+
+•Afficher tous les meubles qui sont abandonnés,
+
+	SELECT nom_produit FROM produits WHERE aband_produit = True
+
+•Effacer le Bo Meuble de brest,
+
+	DELETE FROM clients WHERE Raison_social = "Bo Meuble" AND ville = "Brest" 
+	dans notre cas :
+		DELETE FROM clients WHERE id_raison = 1 AND id_ville = 6 
+
+•Il y a une erreur sur le nom du meuble Apfelgluk, il faut le récrire Apfelgluck,
+
+	UPDATE produits SET nom_produit = "Apfelgluck" WHERE nom_produit = "Apfelgluk" 
+
+•Ajouter un nouveau client : Tout à la maison, Place Terreaux, Lyon,
+
+	insert into ville values (NULL, "Lyon", "France")
+	insert into clients VALUES (NULL, 1, 3, "Place Terreaux", 9)
+
+•Ajouter une nouvelle facture pour le tout à la maison de Lyon , enregistré le 28/08/2018, à 18h. La commande est composé de 18 Naess,
+Pour cet exemple nous avons effectué toutes les requêtes nécessaires pour récupérer les id afin de traiter la demande sans devoir scroller dans la bdd
+	on récupère l'id du magasin:
+		select id_client from clients 
+		join raison_sociale on clients.id_raison = raison_sociale.id_raison
+		join ville on clients.id_ville = ville.id_ville 
+		where raison = "Tout A la maison" and ville = "Lyon" (=8)
+
+	on crée la facture: 
+		INSERT INTO facture VALUES (NULL,"MSQ298", "2018-08-28", 8) 
+
+
+	on récupère l'id du produit puis on rempli la facture:
+		SELECT id_produit FROM produits WHERE nom_produit = "Naess" (=5)
+		SELECT id_facture FROM facture WHERE numero_facture = "MSQ298" (=8)
+	
+		INSERT INTO factures_produit VALUES (8, 5, "18")
+		
+•Retrouver tous les meubles achetés par le Bo Meuble de Paris,
+
+	SELECT DISTINCT nom_produit FROM produits
+	JOIN factures_produit ON produits.id_produit = factures_produit.id_produit
+	JOIN facture ON factures_produit.id_facture = facture.id_facture
+	WHERE facture.id_client = 1
+
+•Retrouver toutes les factures enregistrée depuis le 1er juillet 2018
+
+	SELECT * FROM facture WHERE date_facture >= "2018-07-01" 
