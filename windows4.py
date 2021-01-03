@@ -18,6 +18,11 @@ class Application(tk.Frame):
         self.create_widgets()
 
     def create_widgets(self):
+        # Label/listbox display
+        self.list1 = tk.Listbox(self.master, height=8, width=50, border=0)
+        self.list1.grid(row=9, column=1, columnspan=3,
+                        rowspan=6, pady=50, padx=50)
+
         # Set Facture
         # StringVar Facture
         self.numfact = tk.StringVar()
@@ -122,7 +127,7 @@ class Application(tk.Frame):
         # Get Fournisseur*
         # Button Fournisseur
         self.set_fournisseur_btn = tk.Button(self.master, text='Afficher les fournisseurs', font=('Gabriola', 11),
-                                             command=db1.getFournisseurForProducts())
+                                             command=lambda: self.list1.configure(db1.getFournisseurForProducts()))
         # Label Fournisseur
         self.fournisseur_label = tk.Label(self.master, text='Fournisseurs', font=('Gabriola', 14))
 
@@ -133,7 +138,7 @@ class Application(tk.Frame):
         # Get Products
         # Button Products
         self.set_products_btn = tk.Button(self.master, text='Affichez les produits', font=('Gabriola', 11),
-                                          command=db1.getAllProducts())
+                                          command=lambda: self.list1.configure(db1.getAllProducts()))
         # Label Products
         self.products_label = tk.Label(self.master, text='Products', font=('Gabriola', 14))
 
@@ -154,7 +159,7 @@ class Application(tk.Frame):
         self.date1_label = tk.Label(self.master, text='Date', font=('Gabriola', 10))
         # Button Facture
         self.get_facture_btn = tk.Button(self.master, text='Affichez la facture', font=('Gabriola', 11),
-                                         command=db1.facture(self.id_cli, self.date1))
+                                         command=lambda: self.list1.configure(db1.facture(self.id_cli, self.date1)))
         # Grid Facture
         self.id_cli_entry.grid(row=7, column=1)
         self.date1_entry.grid(row=8, column=1)
@@ -163,10 +168,7 @@ class Application(tk.Frame):
         self.date1_label.grid(row=8, column=0)
         self.get_facture_btn.grid(row=6, column=1)
 
-        # Label/listbox display
-        self.list1 = tk.Listbox(self.master, height=8, width=50, border=0)
-        self.list1.grid(row=9, column=1, columnspan=3,
-                        rowspan=6, pady=50, padx=50)
+
 
 
 root = tk.Tk()
