@@ -24,7 +24,8 @@ class Application(tk.Frame):
         self.datefact = tk.StringVar()
         self.id_cli = tk.StringVar()
         # Button Facture
-        self.set_facture_btn = tk.Button(self.master, text='Enregistrez la facture', font=('Gabriola', 11), command="")
+        self.set_facture_btn = tk.Button(self.master, text='Enregistrez la facture', font=('Gabriola', 11),
+                                         command=db1.SetFacture(self.numfact, self.datefact, self.id_cli))
         # Entry Facture
         self.numfact_entry = tk.Entry(self.master, textvariable=self.numfact)
         self.datefact_entry = tk.Entry(self.master, textvariable=self.datefact)
@@ -51,7 +52,8 @@ class Application(tk.Frame):
         self.adresse = tk.StringVar()
         self.id_ville = tk.StringVar()
         # Button Client
-        self.set_client_btn = tk.Button(self.master, text='Enregistrez le client',font=('Gabriola', 11), command="")
+        self.set_client_btn = tk.Button(self.master, text='Enregistrez le client', font=('Gabriola', 11),
+                                        command=db1.SetClient(self.type1, self.raison, self.adresse, self.id_ville))
 
         # Entry Client
         self.type1_entry = tk.Entry(self.master, textvariable=self.type1)
@@ -88,7 +90,8 @@ class Application(tk.Frame):
         self.aband = tk.StringVar()
         self.desc = tk.StringVar()
         # Button Product
-        self.set_product_btn = tk.Button(self.master, text='Enregistrez le produit',font=('Gabriola', 11), command="")
+        self.set_product_btn = tk.Button(self.master, text='Enregistrez le produit', font=('Gabriola', 11),
+                                         command=db1.SetProduct(self.nom, self.ref, self.aband, self.desc))
 
         # Entry Product
         self.nom_entry = tk.Entry(self.master, textvariable=self.nom)
@@ -118,7 +121,8 @@ class Application(tk.Frame):
 
         # Get Fournisseur*
         # Button Fournisseur
-        self.set_fournisseur_btn = tk.Button(self.master, text='Afficher les fournisseurs',font=('Gabriola', 11), command="")
+        self.set_fournisseur_btn = tk.Button(self.master, text='Afficher les fournisseurs', font=('Gabriola', 11),
+                                             command=db1.getFournisseurForProducts())
         # Label Fournisseur
         self.fournisseur_label = tk.Label(self.master, text='Fournisseurs', font=('Gabriola', 14))
 
@@ -128,7 +132,8 @@ class Application(tk.Frame):
 
         # Get Products
         # Button Products
-        self.set_products_btn = tk.Button(self.master, text='Affichez les produits',font=('Gabriola', 11), command="")
+        self.set_products_btn = tk.Button(self.master, text='Affichez les produits', font=('Gabriola', 11),
+                                          command=db1.getAllProducts())
         # Label Products
         self.products_label = tk.Label(self.master, text='Products', font=('Gabriola', 14))
 
@@ -148,7 +153,8 @@ class Application(tk.Frame):
         self.id_cli1_label = tk.Label(self.master, text='Id_client', font=('Gabriola', 10))
         self.date1_label = tk.Label(self.master, text='Date', font=('Gabriola', 10))
         # Button Facture
-        self.get_facture_btn = tk.Button(self.master, text='Affichez la facture',font=('Gabriola', 11), command="")
+        self.get_facture_btn = tk.Button(self.master, text='Affichez la facture', font=('Gabriola', 11),
+                                         command=db1.facture(self.id_cli, self.date1))
         # Grid Facture
         self.id_cli_entry.grid(row=7, column=1)
         self.date1_entry.grid(row=8, column=1)
